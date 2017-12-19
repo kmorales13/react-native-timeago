@@ -2,12 +2,14 @@
 import React, { Component } from "react";
 import { View, Text } from "react-native";
 import moment from "moment";
+import "moment/locale/es";
 
 export default class TimeAgo extends Component {
   props: {
     time: string,
     interval?: number,
-    hideAgo?: boolean
+    hideAgo?: boolean,
+    language?: string
   };
   state: { timer: null | number } = { timer: null };
 
@@ -38,10 +40,10 @@ export default class TimeAgo extends Component {
   };
 
   render() {
-    const { time, hideAgo } = this.props;
+    const { time, hideAgo, language = "en" } = this.props;
     return (
       <Text {...this.props}>
-        {moment(time).fromNow(hideAgo)}
+        {moment(time).locale(language).fromNow(hideAgo)}
       </Text>
     );
   }
